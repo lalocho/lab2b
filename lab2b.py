@@ -16,9 +16,12 @@ class Node(object):
 def solution_A():
     f = open('test.txt')
     line = f.readline()
-    list = Node(None,-1,None)
+    list = Node(None, -1, None)
     while line:  # reads line by line to not run out of memory; gets only the passwords
-        list = insert_A((line.split(None, 1)[1]).rstrip(), list)
+        try:  # ignores line if irregularity with data
+            list = insert_A((line.split(None, 1)[1]).rstrip(), list)
+        except:
+            print()
         line = f.readline()
 
     f.close()
@@ -36,7 +39,10 @@ def solution_B():
     dict = {}
     while line:
         # getting only the passwords from each line
-        dict = insert_B((line.split(None, 1)[1]).rstrip(), dict)
+        try:  # ignores line if irregularity with data
+            dict = insert_B((line.split(None, 1)[1]).rstrip(), dict)
+        except:
+            print ()
         line = f.readline()
 
     f.close()
@@ -101,6 +107,7 @@ def dict_to_node(dict):
     return temp_node
 
 
+# iterative bubble sort implementation
 def bubble_sort(list):
 
     for i in range(lenlist(list)-1):
@@ -124,6 +131,7 @@ def bubble_sort(list):
     return list
 
 
+# recursive merge sort
 def merge_sort(list):
     # basa case
     if list is None or list.next is None or list.next.next is None:
@@ -146,6 +154,7 @@ def merge_sort(list):
     return list
 
 
+# sorts and merges nodes back
 def merge(left, right):
 
     result = None
@@ -162,6 +171,7 @@ def merge(left, right):
     return result
 
 
+# prints top 20 with number of appearances
 def print_top_20(list):
 
     for i in range(20):
